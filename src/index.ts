@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import  dotenv  from "dotenv";
-import db from './Database/config/config'
+import db from './config'
 
 const app: Express = express();
 dotenv.config({path: './config.env'})
@@ -15,4 +15,4 @@ app.use(express.urlencoded({ extended: true }));
 
     app.listen(PORT, () => {
         console.log(`Server Is Running On ${PORT}`);
-    })
+    });

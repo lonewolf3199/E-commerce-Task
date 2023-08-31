@@ -27,3 +27,4 @@ db.users = require('./../Models/userModel')(sequelize,DataTypes);
 db.users = require('./../Models/vendorModel')(sequelize,DataTypes);
 
 export default db
+

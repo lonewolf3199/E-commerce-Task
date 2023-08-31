@@ -3,7 +3,7 @@ import catchAsync from '../../Errorservices/catchAsync';
 import express, { Express, Request, Response, NextFunction, response } from 'express';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import db from '../../Database/config/config';
+import db from '../../config';
 
 dotenv.config({ path: './config.env' })
 
