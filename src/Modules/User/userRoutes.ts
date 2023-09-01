@@ -1,7 +1,7 @@
 import express from "express";
 import authController from "../Authentication/authController";
 import userController from "./userController";
-import authentication from "../../MIddlewares/authentication";
+import authentication from "../../Middlewares/authentication";
 import userValidation from "../../Validations/userValidation";
 
 const router = express.Router();
@@ -29,3 +29,5 @@ router
 
 router
 .delete('/:id', authentication.toAdmin, userController.deleteUser)
+
+export default router;

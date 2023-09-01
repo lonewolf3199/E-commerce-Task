@@ -23,8 +23,8 @@ const db: any = {}
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require('./../Models/userModel')(sequelize,DataTypes);
-db.users = require('./../Models/vendorModel')(sequelize,DataTypes);
+db.users = require('./../src/Modules/User/userModel')(sequelize,DataTypes);
+db.vendors = require('./../src/Modules/Vendor/vendorModel')(sequelize,DataTypes);
 
 export default db
 
