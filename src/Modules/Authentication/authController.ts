@@ -61,15 +61,23 @@ const login = catchAsync(async( req: Request, res: Response, next: NextFunction)
 });
 
 const loginVendor = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
-    if(!res.locals.vendor.email && !res.locals.vendor.username){
+    if(!res.locals.vendorUser.email && !res.locals.vendorUser.username){
         return new Error('Please Enter Valid Username or Email')
     };
     const vendor = await Vendor.findOne({
-        where: {}
+        where: {email: res.locals.vendorUser.email, username: res.locals.vendorUser.username}
     });
     if(!vendor){
-        
+        res.status(404).json({
+            status: 'fail',
+            message: 'No vendor Found by provided email or username'
+        })
     }
+    res.status(200).json({
+        status: 'success',
+        message: 'Vendor Logged In SuccessFully'
+    })
+    return next();
 });
 
 

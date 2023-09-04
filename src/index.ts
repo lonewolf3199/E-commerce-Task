@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import  dotenv  from "dotenv";
 import userRoute from './Modules/User/userRoutes'
 import vendorRoute from './Modules/Vendor/vendorRoutes';
+import productRoute from './Modules/Product/productRoute'
 import db from './config'
 
 const app: Express = express();
