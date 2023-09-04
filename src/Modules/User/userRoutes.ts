@@ -13,7 +13,7 @@ router
 .post('/login', userValidation.loginValidate, authController.login)
 
 router
-.get('/', authentication.toAdmin,userController.getAllUser);
+.get('/getall', authentication.toAdmin,userController.getAllUser);
 
 router
 .get('/user', userController.getMe);

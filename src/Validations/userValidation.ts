@@ -52,6 +52,7 @@ const registerVendorValidate = async(req: Request, res: Response, next: NextFunc
         return validationErrorResponse(res, error.details[0].message);
     }
     res.locals.vendorUser = value;
+    next();
 };
 
 const loginVendorValidation = async(req: Request, res: Response, next: NextFunction) => {

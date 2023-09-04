@@ -7,7 +7,7 @@ const User = db.users;
 
 const getMe = catchAsync(async(req: Request, res: Response) => {
     const client = await User.findOne({
-        where: { id: res.locals.id }
+        where: { id: res.locals.user.id }
     });
     return res.status(200).json({
         status: 'success',

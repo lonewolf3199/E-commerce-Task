@@ -13,7 +13,10 @@ const Vendor = db.vendors;
 const register = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const userAvailabe = await User.findOne({where: {email: res.locals.user.email}});
     if(userAvailabe){
-        return new Error('User already exist');
+        return res.status(401).json({
+            status: 'fail',
+            message: 'User already exist'
+        })
     }
     const hashPasswords = await bcrypt.hash(res.locals.user.password, 10)
     res.locals.user.password  = hashPasswords
@@ -34,8 +37,10 @@ const register = catchAsync(async(req: Request, res: Response, next: NextFunctio
     })
 });
 
-const login = catchAsync(async( req: Request, res: Response, next: NextFunction) =>{
-    const user = await User.findOne({where: {email: res.locals.email}})
+const login = catchAsync(async( req: Request, res: Response, next: NextFunction) =>{    
+    console.log(res.locals.user.email);
+    const user = await User.findOne({where: {email: res.locals.user.email}})
+    
     if(!user){
         return new Error('Inalid Email or Password')
     }

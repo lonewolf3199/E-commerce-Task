@@ -13,7 +13,9 @@ const Vendor = db.vendors;
 const Product = db.product;
 
 const registerVendor = catchAsync(async(req: Request, res: Response) => {
-    const usernameVendor = await Vendor.findOne({
+    console.log(res.locals.username);
+    
+    const usernameVendor = await Vendor.findOne({        
         where: {username: res.locals.username}
     });
     if(usernameVendor){

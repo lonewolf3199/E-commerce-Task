@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import  dotenv  from "dotenv";
-import userRoute from './Modules/User/userRoutes';
+import userRoute from './Modules/User/userRoutes'
+import vendorRoute from './Modules/Vendor/vendorRoutes';
 import db from './config'
 
 const app: Express = express();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
     // });
 
     app.use('/api/users', userRoute)
+    app.use('/api/vendors', vendorRoute)
 
     app.listen(PORT, () => {
         console.log(`Server Is Running On ${PORT}`);
