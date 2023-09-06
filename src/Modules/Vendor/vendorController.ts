@@ -13,9 +13,7 @@ dotenv.config({ path: './env' });
 const Vendor = db.vendors;
 const Product = db.product;
 
-const registerVendor = catchAsync(async(req: Request, res: Response) => {    
-    console.log(res.locals.vendorUser.username);
-    
+const registerVendor = catchAsync(async(req: Request, res: Response) => {        
     const usernameVendor = await Vendor.findOne({        
         where: {username: res.locals.vendorUser.username}
     });

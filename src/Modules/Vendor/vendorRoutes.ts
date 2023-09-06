@@ -7,24 +7,46 @@ import authentication from "../../Middlewares/authentication";
 const router = express.Router()
 
 router
-.get('/getProduct', authentication.toVendor,vendorController.getVendorProduct);
+.get('/getProduct',
+authentication.loggedIn, 
+authentication.toVendor,
+vendorController.getVendorProduct);
 
 router
-.get('/getVendors', authentication.toAdmin, vendorController.allVendors)
+.get('/getVendors',
+authentication.loggedIn, 
+authentication.toAdmin, 
+vendorController.allVendors)
 
 router
-.get('/:id', authentication.toAdmin, vendorController.oneVendor)
+.get('/:id',
+authentication.loggedIn, 
+authentication.toAdmin, 
+vendorController.oneVendor)
 
 router
-.post('/login', userValidation.loginVendorValidation, authController.loginVendor)
+.post('/login', 
+userValidation.loginVendorValidation, 
+authController.loginVendor)
 
 router
-.post('/registerVendor', userValidation.registerVendorValidate, vendorController.registerVendor)
+.post('/registerVendor',
+authentication.loggedIn, 
+authentication.toAdmin, 
+userValidation.registerVendorValidate, 
+vendorController.registerVendor)
 
 router
-.patch('/:id', authentication.toAdmin, userValidation.updateVendor, vendorController.vendorUpdate)
+.patch('/:id',
+authentication.loggedIn, 
+authentication.toAdmin, 
+userValidation.updateVendor, 
+vendorController.vendorUpdate)
 
 router
-.delete('/:id', authentication.toAdmin, vendorController.vendorDelete)
+.delete('/:id',
+authentication.loggedIn, 
+authentication.toAdmin, 
+vendorController.vendorDelete)
 
 export default router

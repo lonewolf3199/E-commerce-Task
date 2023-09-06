@@ -75,7 +75,8 @@ const loginVendor = catchAsync(async(req: Request, res: Response, next: NextFunc
     }
     res.status(200).json({
         status: 'success',
-        message: 'Vendor Logged In SuccessFully'
+        message: 'Vendor Logged In SuccessFully',
+        data: vendor,
     })
     return next();
 });
