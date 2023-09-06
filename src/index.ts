@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
     app.use('/api/users', userRoute)
     app.use('/api/vendors', vendorRoute)
+    app.use('/api/products', productRoute)
 
     app.listen(PORT, () => {
         console.log(`Server Is Running On ${PORT}`);
