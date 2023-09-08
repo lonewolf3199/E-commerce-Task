@@ -4,6 +4,7 @@ import catchAsync from "../../Errorservices/catchAsync";
 import handlerFactory from "../../Errorservices/handlerFactory";
 import multer from "multer";
 import sharp from "sharp";
+import { nextTick } from "process";
 
 const Product = db.products;
 

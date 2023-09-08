@@ -2,6 +2,7 @@ import express ,{ Express, Request, Response, NextFunction } from "express";
 import db from "../config";
 import jwt_decode from 'jwt-decode'
 import catchAsync from "../Errorservices/catchAsync";
+import { stat } from "fs";
 
 const User = db.users;
 const Vendor = db.vendors
@@ -38,6 +39,18 @@ const loggedIn = catchAsync(async(req: Request, res: Response, next: NextFunctio
             }
             res.locals.vendor = vendorLoggedIn
             return next();
+        }
+        if(decoded.id){
+            const loggedInUser = await User.findOne({
+                where: {id: decoded.id}
+            })
+            if(!loggedInUser){
+                return res.status(401).json({
+                    status: 'fail',
+                    message: 'Invalid Token'
+                })
+            }
+            res.locals.user = loggedInUser
         }
     }
 })
