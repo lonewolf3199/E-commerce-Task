@@ -4,7 +4,6 @@ import userRoute from './Modules/User/userRoutes';
 import vendorRoute from './Modules/Vendor/vendorRoutes';
 import productRoute from './Modules/Product/productRoute';
 import cartRoute from './Modules/Cart/cartRoute';
-import db from './config'
 
 const app: Express = express();
 dotenv.config({path: './config.env'})
