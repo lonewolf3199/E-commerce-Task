@@ -27,7 +27,7 @@ router
 authentication.loggedIn, 
 authentication.toVendor, 
 productValidation.updateProduct, 
-productController.poroductUpdate)
+productController.productUpdate)
 
 router
 .delete('/:id',

@@ -1,7 +1,8 @@
 import express ,{ Express, Request, Response, NextFunction} from "express";
 
-export default (fn: any) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        fn(req, res, next).catch(next)
+export default (asyncFn: any) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        await asyncFn(req, res, next).catch(next)
     }
 }
+

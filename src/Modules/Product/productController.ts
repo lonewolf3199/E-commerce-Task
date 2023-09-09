@@ -4,7 +4,6 @@ import catchAsync from "../../Errorservices/catchAsync";
 import handlerFactory from "../../Errorservices/handlerFactory";
 import multer from "multer";
 import sharp from "sharp";
-import { nextTick } from "process";
 
 const Product = db.products;
 
@@ -37,7 +36,7 @@ const getProducts = catchAsync(async(req: Request, res: Response, next: NextFunc
 const oneProduct = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const productId = req.params.id;
     const document = await Product.findOne({
-        where: [{productId}, {status: 'active'}]
+        where: [{productId, status: 'active'}]
     });
     if(!document){
         return res.status(404).json({
@@ -52,7 +51,7 @@ const oneProduct = catchAsync(async(req: Request, res: Response, next: NextFunct
     });
 });
 
-const poroductUpdate = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+const productUpdate = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const update = await Product.update(res.locals.product, {
         where: {id: req.params.id}
     });
@@ -74,6 +73,6 @@ export default {
     createProduct,
     getProducts,
     oneProduct,
-    poroductUpdate,
+    productUpdate,
     productDelete
 }
