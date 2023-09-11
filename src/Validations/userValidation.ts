@@ -87,11 +87,11 @@ const updateUser =async (req:Request, res: Response, next: NextFunction) => {
     const updateUserData = joi.object({
         name: joi.string(),
         email:joi.string().email(),
-        status : joi.string().valid("Active", "In Active")
+        status : joi.string().valid("Active", "InActive")
     });
     const { error, value } = updateUserData.validate(req.body)
     if(error){
-        return   validationErrorResponse(res , error.details[0].message );
+        return validationErrorResponse(res , error.details[0].message );
     }
     res.locals.update = value
     next()

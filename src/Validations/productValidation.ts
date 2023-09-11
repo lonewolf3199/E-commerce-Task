@@ -7,7 +7,7 @@ const validationErrorResponse = (res: Response, message: string) => {
 
 const productCreateValidation = (req: Request, res: Response, next: NextFunction) => {
     const productSchema = joi.object({
-        name: joi.string().required(),
+        name_product: joi.string().required(),
         price: joi.number().required(),
         category: joi.string().required(),
         description: joi.string().default( '' ),

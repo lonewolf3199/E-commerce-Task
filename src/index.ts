@@ -1,9 +1,10 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import  dotenv  from "dotenv";
 import userRoute from './Modules/User/userRoutes';
 import vendorRoute from './Modules/Vendor/vendorRoutes';
 import productRoute from './Modules/Product/productRoute';
 import cartRoute from './Modules/Cart/cartRoute';
+import db from "./config";
 
 const app: Express = express();
 dotenv.config({path: './config.env'})
@@ -20,6 +21,13 @@ app.use(express.urlencoded({ extended: true }));
     app.use('/api/vendors', vendorRoute);
     app.use('/api/products', productRoute);
     app.use('/api/carts', cartRoute);
+
+    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+        return res.status(err.statusCode || 500).json({
+        status: err.status,
+        message: err.message
+        });
+    });
 
     app.listen(PORT, () => {
         console.log(`Server Is Running On ${PORT}`);

@@ -28,6 +28,9 @@ module.exports = (Sequelize: any, DataTypes: any) => {
         Images: {
             type: DataTypes.ARRAY(DataTypes.STRING)
         },
+        vendorId:{
+            type: DataTypes.INTEGER
+        },
         status: {
             type: DataTypes.STRING
         },

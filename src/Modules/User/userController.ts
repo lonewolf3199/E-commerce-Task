@@ -16,7 +16,7 @@ const getMe = catchAsync(async(req: Request, res: Response) => {
 });
 
 const updateCurrentUser = catchAsync(async(req: Request, res: Response) => {
-    const clientUpdate = await User.update(res.locals.userUpadte, {
+    const clientUpdate = await User.update(res.locals.update, {
         where: {id: res.locals.user.id}
     });
     const document = await User.findOne({
@@ -24,13 +24,14 @@ const updateCurrentUser = catchAsync(async(req: Request, res: Response) => {
     });
     return res.status(200).json({
         status: 'success',
-        message: 'User Updated Successfully'
+        message: 'User Updated Successfully',
+        data: document
     })
 });
 
 const updateUser = catchAsync(async (req: Request, res: Response) => {
     const id = req.params.id;
-    const updateDoc = await User.update(res.locals.updateUser, {
+    const updateDoc = await User.update(res.locals.update, {
         where: { id }
     });
     const document = await User.findOne({ where: { id } })

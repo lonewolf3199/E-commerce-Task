@@ -2,7 +2,6 @@ import express ,{ Express, Request, Response, NextFunction } from "express";
 import db from "../config";
 import jwt_decode from 'jwt-decode'
 import catchAsync from "../Errorservices/catchAsync";
-import { stat } from "fs";
 
 const User = db.users;
 const Vendor = db.vendors
@@ -51,17 +50,24 @@ const loggedIn = catchAsync(async(req: Request, res: Response, next: NextFunctio
                 })
             }
             res.locals.user = loggedInUser
+            return next();
         }
     }
+    return res.status(400).json({
+        status: 'fail',
+        message:'You are not loggedin to perform this action'
+    })
 })
 
 const toVendor = (req: Request, res: Response, next: NextFunction) => {
-    if (!res.locals.vendor || !res.locals.vendor._id ){
+    console.log(2);    
+    if (!res.locals.vendor || !res.locals.vendor.id ){
         return res.status(401).json({
             status: 'fail',
             message:'You Are Not Authorised To Access Vendor Route'
         })
     };
+    next()
 };
 
 export default{ 

@@ -11,7 +11,7 @@ import { AsyncLocalStorage } from 'async_hooks';
 dotenv.config({ path: './env' });
 
 const Vendor = db.vendors;
-const Product = db.product;
+const Product = db.products;
 
 const registerVendor = catchAsync(async(req: Request, res: Response) => {        
     const usernameVendor = await Vendor.findOne({        
@@ -51,37 +51,41 @@ const registerVendor = catchAsync(async(req: Request, res: Response) => {
 });
 
 const getVendorProduct = catchAsync(async(req: Request, res: Response) => {
-    const vendorId = res.locals.vendorUser.id;
+    console.log(1);
+    
+    const vendorId = res.locals.vendor.id;
     const vendorProducts = await Product.findAll({
         where: {vendorId}
     });
     return res.status(200).json({
         status: 'success',
-        message: 'Here are the list of vendors Product'
+        message: 'Here are the list of vendors Product',
+        data: vendorProducts
     });
 });
 
 const vendorUpdate = catchAsync(async(req: Request, res: Response) => {
     const vendorId = req.params.id;
-    const vendor = await Vendor.findById(vendorId)
+    const vendor = await Vendor.findByPk(vendorId)
     if(!vendor){
         return res.status(400).json({
             status: 'fail',
             message: 'Vendor Not Found'
         });
     }
-    const vendorUpdated = await vendor.update(res.locals.vendorUser, {
+    const vendorUpdated = await vendor.update(res.locals.vendor, {
         where: { vendorId }
     });
     return res.status(200).json({
         status: 'success',
-        message: 'Successfully Updated The Vendor'
+        message: 'Successfully Updated The Vendor',
+        data: vendorUpdated
     });
 });
 
-const allVendors = handlerFactory.getAll(vendor);
-const oneVendor = handlerFactory.getOne(vendor);
-const vendorDelete = handlerFactory.deleteOne(vendor);
+const allVendors = handlerFactory.getAll(Vendor);
+const oneVendor = handlerFactory.getOne(Vendor);
+const vendorDelete = handlerFactory.deleteOne(Vendor);
 
 export default {
     registerVendor,

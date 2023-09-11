@@ -12,7 +12,7 @@ const getAll = ( Model: any) => catchAsync(async(req: Request, res: Response, ne
 });
 
 const getOne = (Model: any) =>  catchAsync(async(req: Request, res: Response, next: NextFunction) => {
-    let query = Model.findById(req.params.id)
+    let query = Model.findByPk(req.params.id)
     const document = await query
     if(!document){
         res.status(404).json({
@@ -27,9 +27,8 @@ const getOne = (Model: any) =>  catchAsync(async(req: Request, res: Response, ne
 });
 
 const deleteOne = (Model: any) => catchAsync(async(req: Request, res: Response, next: NextFunction) => {
-    let query = Model.findById(req.params.id)
-    const document = await query.destroy({
-        where: { query }
+    const document = await Model.destroy({
+        where: { id: req.params.id }
     })
     if(!document){
         res.status(404).json({

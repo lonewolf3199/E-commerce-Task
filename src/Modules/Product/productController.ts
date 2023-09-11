@@ -8,7 +8,7 @@ import sharp from "sharp";
 const Product = db.products;
 
 const createProduct = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    res.locals.products.idVendor = res.locals.vendorUser.id
+    res.locals.product.vendorId = res.locals.vendor.id
     const product = await Product.create(res.locals.product)
     if(product){
         return res.status(201).json({

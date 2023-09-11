@@ -73,10 +73,12 @@ const loginVendor = catchAsync(async(req: Request, res: Response, next: NextFunc
             message: 'No vendor Found by provided email or username'
         })
     }
+    const email = vendor.email;
+    const token = jwtToken.sign({email}, process.env.JWT_CONFIDENTIAL as string, {expiresIn: process.env.JWT_EXPIRES_IN})
     res.status(200).json({
         status: 'success',
         message: 'Vendor Logged In SuccessFully',
-        data: vendor,
+        data: vendor, token
     })
     return next();
 });
