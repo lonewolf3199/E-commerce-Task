@@ -24,7 +24,7 @@ const productCreateValidation = (req: Request, res: Response, next: NextFunction
 
 const updateProduct = (req: Request, res: Response, next: NextFunction) => {
     const updateSchema = joi.object({
-        name: joi.string(),
+        name_product: joi.string(),
         price: joi.number(),
         category: joi.string(),
         description: joi.string(),

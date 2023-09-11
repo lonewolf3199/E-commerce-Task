@@ -36,7 +36,7 @@ const getProducts = catchAsync(async(req: Request, res: Response, next: NextFunc
 const oneProduct = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
     const productId = req.params.id;
     const document = await Product.findOne({
-        where: [{productId, status: 'active'}]
+        where: [{id: productId} , {status: 'active'}]
     });
     if(!document){
         return res.status(404).json({
@@ -61,9 +61,17 @@ const productUpdate = catchAsync(async(req: Request, res: Response, next: NextFu
             message: 'Not Able To Update The Product At This Moment'
         });
     };
+    const document = await Product.findOne({where: {id: req.params.id}})
+    if(!document){
+        return res.status(400).json({
+            status: 'fail',
+            message: 'No Document Found By Provided Id'
+        })
+    }
     return res.status(200).json({
         status: 'success',
-        message: 'Product Updated Successfully'
+        message: 'Product Updated Successfully',
+        data: document
     });
 });
 
